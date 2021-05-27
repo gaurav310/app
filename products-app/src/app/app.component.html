@@ -1,0 +1,42 @@
+<nav class="product-filter">
+
+  <h1>Products</h1>
+
+  <div class="sort">
+
+    <div class="collection-sort">
+      <label>Filter by:</label>
+      <select>
+        <option value="/">All Products</option>
+      </select>
+    </div>
+
+    <div class="collection-sort">
+      <label>Sort by:</label>
+      <select>
+        <option value="/">Featured</option>
+      </select>
+    </div>
+
+  </div>
+
+</nav>
+
+<section class="products">
+
+  <!-- It's likely you'll need to link the card somewhere. You could add a button in the info, link the titles, or even wrap the entire card in an <a href="..."> -->
+
+  <div class="product-card shadow" *ngFor="let product of products_data">
+    <div class="product-image">
+      <p [ngStyle]="{'font-size':product?.size+'px'}">{{product?.face}}</p>
+    </div>
+    <div class="product-info">
+      <p>Size: {{product?.size}}</p>
+      <p>Price : {{product?.price  | currency}}</p>
+      <p>Added On:  {{getDays(product?.date) > 7? (product?.date | date: 'fullDate' ): (getDays(product?.date)+' Days Ago')}}</p>
+    </div>
+  </div>
+
+  <!-- more products -->
+  
+</section>
