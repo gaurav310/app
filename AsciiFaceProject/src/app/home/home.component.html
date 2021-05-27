@@ -1,0 +1,51 @@
+<div class="overlay" *ngIf="!productLoaded || scrollLoad">
+  <div class="center">
+      <mat-progress-spinner diameter=50 
+                          mode="indeterminate" 
+                color="primary">
+    </mat-progress-spinner> 
+    <div><h2 class="text-primary">Loading...</h2></div>
+
+  </div>
+</div>
+
+    
+<div class="container-fluid my-4 p-4" >
+    <div class="row mb-2">
+        <div class="col-md-12 float-left text-center">
+            <mat-form-field appearance="fill">
+                <mat-label>Sorting</mat-label>
+                <mat-select (selectionChange)="sortProducts($event)">
+                  <mat-option *ngFor="let sort of sorts" [value]="sort.value">
+                    {{sort.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
+    <div class="row m-4 row">
+        <div class="col-md-3 my-3" *ngFor="let prod of products">
+            <div class="card rounded shadow-sm border-0">
+                <p class="card-header red face-size" [ngStyle]="{'font-size': prod.size+'px' }">{{prod?.face}}</p>
+                <div class="card-body">
+                <p class="card-text"><i>{{prod?.size}} px</i></p>
+                <h5 class="text-dark price-size my-2">{{prod?.price|currency}}</h5>
+                <p class="small text-muted text-right">{{ getModifiedDate(prod?.date) > 7? (prod?.date|date:'fullDate'):(getModifiedDate(prod.date)+' Days Ago')  }}</p>                                                                                        
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <div class="bottom" *ngIf="scrollLoad">
+      <mat-progress-spinner diameter=50 
+                          mode="indeterminate" 
+                color="primary">
+    </mat-progress-spinner> 
+  </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid" *ngIf="products.length == allProducts.length">
+  <div class="container">
+    <h4 class="text-center">~ End of Catalogue ~</h4>    
+  </div>
+</div>
